@@ -46,8 +46,8 @@ class StaticServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
         global webSock
-        root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'weight-calculation/output/weight-calculation')
-        #root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app/weight-calculation') #for pyinstaller command
+        #root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'weight-calculation/output/weight-calculation')
+        root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app/weight-calculation') #for pyinstaller command
         filename = root + ''
         if self.path == '/':
             filename = root + '/index.html' 
@@ -90,14 +90,17 @@ def serial_send(server):
         pass
 
 import webbrowser
-url = 'http://localhost:8000'
-chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
+
+@thread6.threaded()   
+def run_chrome():
+    url = 'http://localhost:8000'
+    chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
+    webbrowser.get(chrome_path).open(url)
 
 try:
-
+    run_chrome()
     run_http()
     serial_send(webSock)
-    webbrowser.get(chrome_path).open(url)
     run_websock(webSock)
 
 except Exception as e:
