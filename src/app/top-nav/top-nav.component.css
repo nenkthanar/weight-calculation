@@ -1,3 +1,9 @@
 p{
     color: aliceblue;
 }
+mat-card{
+    background-color:rgb(70, 158, 180) ;
+  }
+mat-card-content{
+    height: 100%;
+}

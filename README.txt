@@ -1,1 +1,0 @@
-Create by Thanarnop Robkwaen

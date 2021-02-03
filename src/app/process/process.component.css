@@ -15,12 +15,6 @@ mat-card-content{
     text-align:center;
 }
 
-#measure-div{
-  position: absolute;
-  width:300px;
-  height:250px;
-  background :transparent;
-}
 div{
   font-size:18px;
 }

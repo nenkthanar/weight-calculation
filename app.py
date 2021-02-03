@@ -28,14 +28,12 @@ def message_received(client, server, message):
 		message = message[:200]+'..'
 	ws_comm.command = message
  
-
 PORT=9000
 webSock = WebsocketServer(PORT)
 webSock.set_fn_new_client(new_client)
 webSock.set_fn_client_left(client_left)
 webSock.set_fn_message_received(message_received)
 
-    
 class StaticServer(BaseHTTPRequestHandler):
     def end_headers (self):
         self.send_header('Access-Control-Allow-Origin', '*')
@@ -75,10 +73,10 @@ def run_http(server_class=HTTPServer, handler_class=StaticServer, port=8000):
 
 @thread6.threaded()    
 def serial_read(server):
-    import Serial.Serial as ser
+    from python_serial import serial_commu 
     try:
         while True:
-            val = ser.read()
+            val = serial_commu.read()
             if val != "":
                 print("Serial read : ",val)    
                 server.send_message_to_all(json.dumps({"measure":val}))         

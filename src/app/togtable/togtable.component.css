@@ -1,0 +1,16 @@
+h3{
+    text-align: center;
+    color: rgb(10, 10, 10);
+}
+.container{
+    height: 100%;
+}
+mat-card{
+    background-color:rgb(70, 158, 180) ;
+  }
+mat-card-content{
+    height: 100%;
+}
+.center{
+    text-align: center;
+}
