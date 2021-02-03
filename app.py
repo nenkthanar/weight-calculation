@@ -4,8 +4,10 @@ import logging
 import io
 import socketserver
 import websockets
+import threading
 from threading import Condition
 from threading import Thread
+
 import time
 import json
 import asyncio
@@ -30,9 +32,12 @@ def message_received(client, server, message):
  
 PORT=9000
 webSock = WebsocketServer(PORT)
-webSock.set_fn_new_client(new_client)
-webSock.set_fn_client_left(client_left)
-webSock.set_fn_message_received(message_received)
+
+def run_websock(webSock):
+    webSock.set_fn_new_client(new_client)
+    webSock.set_fn_client_left(client_left)
+    webSock.set_fn_message_received(message_received)
+    webSock.run_forever()
 
 class StaticServer(BaseHTTPRequestHandler):
     def end_headers (self):
@@ -41,7 +46,8 @@ class StaticServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
         global webSock
-        root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'weight-cal/dist/weight-cal')
+        root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'weight-calculation/output/weight-calculation')
+        #root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app/weight-calculation') #for pyinstaller command
         filename = root + ''
         if self.path == '/':
             filename = root + '/index.html' 
@@ -72,7 +78,7 @@ def run_http(server_class=HTTPServer, handler_class=StaticServer, port=8000):
     httpd.serve_forever()
 
 @thread6.threaded()    
-def serial_read(server):
+def serial_send(server):
     from python_serial import serial_commu 
     try:
         while True:
@@ -83,10 +89,17 @@ def serial_read(server):
     except  Exception as e:
         pass
 
+import webbrowser
+url = 'http://localhost:8000'
+chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
+
 try:
+
     run_http()
-    serial_read(webSock)
-    webSock.run_forever()
+    serial_send(webSock)
+    webbrowser.get(chrome_path).open(url)
+    run_websock(webSock)
+
 except Exception as e:
     pass
 
