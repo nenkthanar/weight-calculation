@@ -1,0 +1,12 @@
+
+a:hover{
+    cursor:pointer;
+}
+i{
+    position: absolute;
+    top:5px;
+    left:0px;
+}
+p,i{
+    color:#fff;
+}

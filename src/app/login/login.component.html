@@ -1,0 +1,16 @@
+<div class = "wrapper">
+    <form action="/action_page.php" style="max-width:500px;margin:auto">
+        <h2> User Login</h2>
+        <div class="input-container">
+          <i class="fa fa-user icon"></i>
+          <input class="input-field" type="text"  name="userrnm" [(ngModel)] = "username">
+        </div>
+      
+        <div class="input-container">
+          <i class="fa fa-key icon"></i>
+          <input class="input-field" type="password"  name="password" [(ngModel)] = "password">
+        </div>
+      
+        <button type="button" class="btn" (click) = "authenticate()">Login</button>
+      </form>
+</div>
