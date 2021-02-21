@@ -90,8 +90,7 @@ def serial_send(server):
         pass
 
 import webbrowser
-
-@thread6.threaded()   
+ 
 def run_chrome():
     url = 'http://localhost:8000'
     chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'

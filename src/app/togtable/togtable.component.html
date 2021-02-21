@@ -1,13 +1,22 @@
 <div class = "wrapper">
     <div class="container">
-        <mat-card >
-    <h3>TM-ORG-004-T10</h3>
-    <hr>
-    <div class="row center">
-        <div class="col">READ VALUE</div>
-        <div class="col">%M</div>
-    </div>
-    <hr>
-        </mat-card>
+    <table class="table center">
+        <thead>
+          <tr>
+            <th scope="col">NO</th>
+            <th scope="col">ACTUAL</th>
+            <th scope="col">%M</th>
+            <th scope="col">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let item of table;let i = index" [attr.data-index]="i">
+            <td><span>{{i+1}}</span></td>
+            <td><input  type="text" [(ngModel)]="item.actual" (keydown.enter) = "addNew($event)"></td>
+            <td><input  type="text" [(ngModel)]="item.percent" (keydown.enter) = "addNew($event)"></td>
+            <td><a (click) = "remove(i)">REMOVE</a></td>
+          </tr>
+        </tbody>
+      </table>     
 </div>
 </div>

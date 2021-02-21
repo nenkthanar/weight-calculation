@@ -14,3 +14,15 @@ mat-card-content{
 .center{
     text-align: center;
 }
+input{
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    width:100px;
+}
+a:hover{
+    cursor: pointer;
+}
+span{
+    text-align: center;
+}
